@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FB体育 · 轻量导航页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            line-height: 1.7;
+            color: #1e1e1e;
+            background: #f5f6f8;
+        }
+
+        a {
+            color: #b8860b;
+            text-decoration: none;
+            transition: border-bottom 0.2s;
+        }
+
+        a:hover {
+            border-bottom: 2px solid #b8860b;
+        }
+
+        /* 深色头图导航区 */
+        .hero-nav {
+            background: #0b1a2a;
+            color: #e8edf2;
+            padding: 1.2rem 2rem 0.8rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-nav .logo {
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #f0e6d0;
+        }
+
+        .hero-nav .logo em {
+            font-style: normal;
+            color: #d4a84b;
+        }
+
+        .hero-nav nav {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-nav nav a {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            padding: 0.25rem 0;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .hero-nav nav a:hover {
+            color: #f0e6d0;
+            border-bottom-color: #b8860b;
+        }
+
+        /* 主视觉区 */
+        .hero-banner {
+            background: #0b1a2a;
+            color: #e8edf2;
+            padding: 2.8rem 2rem 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-banner h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-banner h1 span {
+            color: #d4a84b;
+            font-weight: 500;
+        }
+
+        .hero-banner p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1rem;
+            color: #b9c7d9;
+            line-height: 1.8;
+        }
+
+        /* 浅色正文区域 */
+        .container {
+            max-width: 1100px;
+            margin: -2rem auto 0 auto;
+            padding: 0 1.5rem 3rem 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .intro-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 2.2rem 2.5rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            margin-bottom: 2.8rem;
+        }
+
+        .intro-card h2 {
+            font-weight: 400;
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            color: #1e2b3a;
+            border-left: 4px solid #b8860b;
+            padding-left: 1rem;
+        }
+
+        .intro-card p {
+            margin-bottom: 1.1rem;
+            color: #2f3e4e;
+        }
+
+        .intro-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 三个场景模块 (卡片网格) */
+        .scenes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .scene-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .scene-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+        }
+
+        .scene-card h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #1e2b3a;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .scene-card h3::before {
+            content: "→";
+            color: #b8860b;
+            font-weight: 300;
+        }
+
+        .scene-card p {
+            font-size: 0.95rem;
+            color: #3d4d5e;
+            line-height: 1.7;
+        }
+
+        .scene-card .tag {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            background: #f0e7da;
+            color: #7a5e2e;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        /* 常见说明 (FAQ 摘要) */
+        .faq-panel {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2.5rem;
+        }
+
+        .faq-panel h3 {
+            font-weight: 400;
+            font-size: 1.3rem;
+            margin-bottom: 1.4rem;
+            color: #1e2b3a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-panel h3::after {
+            content: "· · ·";
+            letter-spacing: 4px;
+            color: #b8860b;
+            font-size: 1rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eaeef3;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 500;
+            color: #1e2b3a;
+            margin-bottom: 0.3rem;
+        }
+
+        .faq-item p {
+            color: #3d4d5e;
+            font-size: 0.95rem;
+        }
+
+        /* 底部 */
+        .footer-note {
+            text-align: center;
+            padding: 2rem 0 3rem 0;
+            color: #6b7a8c;
+            font-size: 0.85rem;
+            border-top: 1px solid #dce2e9;
+            margin-top: 1rem;
+        }
+
+        .footer-note a {
+            color: #7a5e2e;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 680px) {
+            .hero-nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+                padding: 1rem 1.2rem;
+            }
+
+            .hero-nav nav {
+                gap: 1.2rem;
+            }
+
+            .hero-banner {
+                padding: 2rem 1.2rem 3rem 1.2rem;
+            }
+
+            .hero-banner h1 {
+                font-size: 1.6rem;
+            }
+
+            .intro-card {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .faq-panel {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .scenes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色导航头图 -->
+    <header class="hero-nav">
+        <div class="logo"><em>FB</em>体育</div>
+        <nav>
+            <a href="#intro">概览</a>
+            <a href="#scenes">场景</a>
+            <a href="#faq">说明</a>
+            <a href="https://beta-fbsports.com" target="_blank" rel="noopener">FB体育</a>
+        </nav>
+    </header>
+
+    <!-- hero -->
+    <section class="hero-banner">
+        <h1>稳定入口 · <span>FB体育</span></h1>
+        <p>一个指向清晰、内容克制的导航页，帮助你快速了解平台的定位与使用边界。没有浮夸的承诺，只有平实的介绍与引导。</p>
+    </section>
+
+    <!-- 正文区域 -->
+    <div class="container">
+
+        <!-- 核心介绍 -->
+        <div class="intro-card" id="intro">
+            <h2>关于这个页面</h2>
+            <p>很多朋友第一次接触 <a href="https://beta-fbsports.com">FB体育</a> 时，往往需要一份轻量的说明，而不是铺天盖地的推广。这里整理了平台最基础的几个侧面：它提供哪些类型的服务、通常的使用方式，以及一些常见的疑问。</p>
+            <p>我们相信，一个好的入口应该像安静的向导——不喧哗，但足够可靠。如果你正在寻找一个稳定的访问起点，下面几个模块可以帮你更快地建立认知。</p>
+        </div>
+
+        <!-- 三个场景模块 -->
+        <div class="scenes-grid" id="scenes">
+            <div class="scene-card">
+                <h3>日常浏览</h3>
+                <p>通过 <a href="https://beta-fbsports.com">FB体育</a> 进入后，界面以内容模块为主，信息层级清晰。适合每天花少量时间了解动态，不用在复杂菜单里反复查找。</p>
+                <span class="tag">轻量使用</span>
+            </div>
+            <div class="scene-card">
+                <h3>信息查阅</h3>
+                <p>平台内聚合了多个分类的内容条目，结构偏扁平。如果你想快速定位某类主题，可以直接利用导航或搜索，减少跳转步骤。</p>
+                <span class="tag">高效查找</span>
+            </div>
+            <div class="scene-card">
+                <h3>功能探索</h3>
+                <p>除了基础浏览，也包含一些交互工具和个性化设置。初次使用时，不妨从个人中心或帮助区域开始，逐步了解各项功能的含义。</p>
+                <span class="tag">循序渐进</span>
+            </div>
+        </div>
+
+        <!-- 常见说明 (FAQ 摘要) -->
+        <div class="faq-panel" id="faq">
+            <h3>常见说明</h3>
+
+            <div class="faq-item">
+                <strong>访问时对网络环境有要求吗？</strong>
+                <p>建议使用稳定的网络连接。如果遇到加载缓慢或无法打开的情况，可以先检查本地网络，或稍后再试。</p>
+            </div>
+
+            <div class="faq-item">
+                <strong>页面内容多久更新一次？</strong>
+                <p>平台内容按常规节奏更新，具体频率视不同模块而定。你可以关注首页或分类页的时间戳，了解最新动态。</p>
+            </div>
+
+            <div class="faq-item">
+                <strong>是否支持移动设备？</strong>
+                <p>响应式设计覆盖了手机和平板，但部分复杂功能在大屏上体验更完整。建议根据使用场景选择合适的设备。</p>
+            </div>
+
+            <div class="faq-item">
+                <strong>还有其他问题怎么办？</strong>
+                <p>你可以在 <a href="https://beta-fbsports.com">FB体育</a> 的帮助中心或联系渠道提交反馈，通常会有基础的指引和回复。</p>
+            </div>
+        </div>
+
+        <!-- 一句温和的收尾 -->
+        <div style="text-align: center; margin-top: 1.2rem; color: #4f5f6f; font-size: 0.95rem; padding: 0.8rem 0;">
+            <span>慢慢来，从 <a href="https://beta-fbsports.com" style="border-bottom: 1px dashed #b8860b;">FB体育</a> 开始。</span>
+        </div>
+
+    </div>
+
+    <!-- 底部 -->
+    <footer class="footer-note">
+        此页面仅为轻量介绍，内容仅供参考。<br>
+        若需直接访问，请使用 <a href="https://beta-fbsports.com" target="_blank" rel="noopener">FB体育</a>。
+    </footer>
+
+</body>
+</html>
